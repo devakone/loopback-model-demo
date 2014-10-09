@@ -1,0 +1,10 @@
+{
+	"name": "AppUser",
+	"plural": "AppUsers",
+	"base": "User",
+	"properties": {},
+	"validations": [],
+	"relations": {},
+	"acls": [],
+	"methods": []
+}

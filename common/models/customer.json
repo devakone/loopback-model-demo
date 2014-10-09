@@ -1,0 +1,21 @@
+{
+  "name": "Customer",
+  "plural": "Customers",
+  "base": "AppUser",
+  "strict": true,
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "profile": {
+      "type": "embedsOne",
+      "model": "CustomerProfile",
+      "options": {
+        "validate": true,
+        "autoId": true,
+        "persistent": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": []
+}

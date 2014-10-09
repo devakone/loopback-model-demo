@@ -1,0 +1,10 @@
+{
+	"name": "Seller",
+	"plural": "Sellers",
+	"base": "AppUser",
+	"properties": {},
+	"validations": [],
+	"relations": {},
+	"acls": [],
+	"methods": []
+}

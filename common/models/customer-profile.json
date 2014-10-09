@@ -1,0 +1,11 @@
+{
+  "name": "CustomerProfile",
+  "plural": "CustomerProfiles",
+  "base": "PersistedModel",
+  "strict": true,
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
