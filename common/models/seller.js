@@ -14,7 +14,7 @@ module.exports = function(Seller) {
 
 	}
 
-	Customer.remoteMethod('sellerDemo', {
+	Seller.remoteMethod('sellerDemo', {
 		accepts: {
 			arg: 'filter',
 			type: 'object'
@@ -26,7 +26,7 @@ module.exports = function(Seller) {
 		http: {
 			path: '/sellerDemo'
 		}
-	}, Customer.stats);
+	}, Seller.stats);
 
 
 };
