@@ -1,5 +1,5 @@
 var loopback = require('loopback'),
-    = require('../schemas/seller'),
+    require('../schemas/seller'),
     AppUser = loopback.getModel('AppUser'),
     _ = require('lodash');
 
