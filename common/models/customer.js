@@ -1,31 +1,54 @@
 var loopback = require('loopback'),
     CustomerSchema = require('../schemas/customer'),
-    AppUser = loopback.getModel('AppUser');
+    AppUser = loopback.getModel('AppUser'),
+    _ = require('lodash');
+
+
 
 module.exports = function(Customer) {
-    Customer = AppUser.extend('Customer', CustomerSchema);
+    _.extend(Customer.definition.rawProperties, CustomerSchema);
+    Customer.on('attached', function(app) {
 
 
-    Customer.stats = function(filter) {
+        /*Customer.embedsOne('CustomerProfile', {
+            as: 'profile'
+        }); */
 
-        return {
-            text: "hello"
-        }
+        console.log("Customer attached to data source")
 
-    }
+    });
 
-    Customer.remoteMethod('customerDemo', {
-        accepts: {
-            arg: 'filter',
-            type: 'object'
-        },
-        returns: {
-            arg: 'demo',
-            type: 'object'
-        },
-        http: {
-            path: '/customerDemo'
-        }
-    }, Customer.stats);
+
+    Customer.setup = function() {
+        Customer.base.setup.apply(this, arguments);
+
+        this.remoteMethod('customerDemo', {
+            description: 'Find nearby locations around the geo point',
+            accepts: [{
+                arg: 'here',
+                type: 'GeoPoint',
+                required: true,
+                description: 'geo location (lng & lat)'
+            }, {
+                arg: 'page',
+                type: 'Number',
+                description: 'number of pages (page size=10)'
+            }, {
+                arg: 'max',
+                type: 'Number',
+                description: 'max distance in miles'
+            }],
+            returns: {
+                arg: 'locations',
+                root: true
+            },
+            http: {
+                verb: 'GET'
+            }
+        });
+    };
+
+    Customer.setup();
+    Customer.definition.build(true);
 
 };

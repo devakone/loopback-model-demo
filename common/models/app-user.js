@@ -1,11 +1,13 @@
 var loopback = require('loopback'),
-	AppUserSchema = require('../schemas/app-user');
+    AppUserSchema = require('../schemas/app-user'),
+    _ = require('lodash');
 
 
 
 
 module.exports = function(AppUser) {
-	AppUser = loopback.User.extend('AppUser', AppUserSchema);
-
+    //Extend the definition using my custom schema
+    _.extend(AppUser.definition.rawProperties, AppUserSchema);
+    AppUser.definition.build(true);
 
 };

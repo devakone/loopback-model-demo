@@ -1,32 +1,34 @@
 var loopback = require('loopback'),
-	SellerSchema = require('../schemas/seller'),
-	AppUser = loopback.getModel('AppUser');
+    = require('../schemas/seller'),
+    AppUser = loopback.getModel('AppUser'),
+    _ = require('lodash');
 
 module.exports = function(Seller) {
 
-	Seller = AppUser.extend('Seller', SellerSchema);
+    //Extend the definition using my custom schema
+    _.extend(Seller.definition.rawProperties, SellerSchema);
+    Seller.definition.build(true);
+    Seller.stats = function(filter) {
 
-	Seller.stats = function(filter) {
+        return {
+            text: "hello"
+        }
 
-		return {
-			text: "hello"
-		}
+    }
 
-	}
-
-	Seller.remoteMethod('sellerDemo', {
-		accepts: {
-			arg: 'filter',
-			type: 'object'
-		},
-		returns: {
-			arg: 'demo',
-			type: 'object'
-		},
-		http: {
-			path: '/sellerDemo'
-		}
-	}, Seller.stats);
+    Seller.remoteMethod('sellerDemo', {
+        accepts: {
+            arg: 'filter',
+            type: 'object'
+        },
+        returns: {
+            arg: 'demo',
+            type: 'object'
+        },
+        http: {
+            path: '/sellerDemo'
+        }
+    }, Seller.stats);
 
 
 };

@@ -1,6 +1,9 @@
 var loopback = require('loopback'),
-	CustomerProfileSchema = require('../schemas/customer-profile');
+    CustomerProfileSchema = require('../schemas/customer-profile'),
+    _ = require('lodash');
 
 module.exports = function(CustomerProfile) {
-	CustomerProfile = CustomerProfile.extend('CustomerProfile', CustomerProfileSchema);
+    //Extend the definition using my custom schema
+    _.extend(CustomerProfile.definition.rawProperties, CustomerProfileSchema);
+    CustomerProfile.definition.build(true);
 };
